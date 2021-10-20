@@ -1,0 +1,81 @@
+﻿@model IEnumerable<SuppliersDb.Models.Item>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>List of Suppliers</h1>
+
+<p>
+    <a asp-action="Create">Add New</a>
+</p>
+
+<form method="get" asp-action="Search">
+    <p>
+        <input type="search" placeholder="Enter Search Keyword..." value="@ViewData["GetSupplierDetails"]" name="SupplierSearch" style="width:500px" />
+        <input type="submit" value="Search" class="btn btn-primary" />
+        <a asp-action="Search" class="btn btn-primary">Get All records</a>
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Representative)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateAdded)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateModified)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Representative)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateAdded)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateModified)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.Type)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.SupplierId">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.SupplierId"
+                       onclick='return confirm("Are you Sure?");'>Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
